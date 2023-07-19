@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('./controller/connection');
+const db = require('./config/connection');
 
 const {Reaction, Thought, User}= require('./models');
 
