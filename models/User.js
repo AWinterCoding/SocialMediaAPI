@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
         },
     },
     thoughts: [thoughtSchema],
-    friends: [UserSchema],
+    friends: [this],
 });
 
 const User = mongoose.model('User', UserSchema);
