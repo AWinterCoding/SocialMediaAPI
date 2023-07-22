@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
     thoughts: [thoughtSchema],
     friends: [this],
 });
+
 const User = mongoose.model('User', UserSchema);
 
 let userlist = [

@@ -1,4 +1,4 @@
-const { User } = require("../models/User");
+const { User } = require("../models");
 
 module.exports = {
     //This is a test to get all Users
@@ -8,6 +8,7 @@ module.exports = {
             res.json(users);
         } catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
 
@@ -18,6 +19,7 @@ module.exports = {
           res.json(user);
         } catch (err) {
           res.status(500).json(err);
+          console.log(err);
         }
       },
 
