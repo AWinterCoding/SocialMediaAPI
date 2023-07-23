@@ -27,7 +27,7 @@ module.exports = {
     //function to retrieve a single thought
     async getSingleThought(req, res){
         try{
-            const thought = await Thought.findOne({ _id: req.params.studentID}).select('-__v');
+            const thought = await Thought.findOne({ _id: req.params._id});
 
             if(!thought){
                 return res.status(404).json({ message: 'No thought found'});

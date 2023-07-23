@@ -6,8 +6,8 @@ router.route('/').get(getUsers).post(createUser);
 
 router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
-router.route('/:thoughtId/reactions').post(addReaction);
+// router.route('/:thoughtId/reactions').post(addReaction);
 
-router.route('/:thoughtId/reactions/:reactionsId').delete(removeReaction);
+// router.route('/:thoughtId/reactions/:reactionsId').delete(removeReaction);
 
 module.exports = router;
