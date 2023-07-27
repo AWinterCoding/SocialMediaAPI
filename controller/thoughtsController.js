@@ -71,31 +71,32 @@ module.exports = {
         }
       },
 
-      //function to add a reaction
-      async addReaction(req, res){
-        try{
-            const though = await Thought.findOneAndUpdate(
-                {_id: req.params.thoughtID },
-                { $addToSet: {reactions: req.body} });
-                if(!though){
-                    return res.status(404).json({message: 'no thought found'});
-                }
-                res.json(thought);
-        }catch(err){
-            res.status(500).json(err);
-        }
-      },
-
       //function to remove a reaction.
       async removeReaction(req, res){
         try{
-            const thought = await Thought.findOneAndReplace(
-                {_id: req.params.studentID},
-                { $pull: {reactions: {reactionId: req.params.reactionId}}},
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtID},
+                { $pull: {reactions: {reactionId: req.body.reactionID}}},
             );
             res.json(thought);
         }catch(err){
             res.status(500).json(err);
         }
-      }
+      },
+
+      //function to add reaction
+      async addReaction(req, res){
+        try{
+        const thought = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtID},
+             {$push: {reactions: req.body}},
+         );
+        if(!thought){
+             res.status(404).json({message: 'No Thought Exists'});
+        }
+        res.json(thought);
+       }catch(err) {
+            res.status(500).json(err);
+        }
+      },
     };

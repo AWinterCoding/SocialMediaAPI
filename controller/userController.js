@@ -72,4 +72,42 @@ module.exports = {
             res.status(500).json(err);
         }
       },
+
+      //function to add a new friend to a user's friend list
+
+      async addFriend(req, res){
+        try{
+          const baseuser = await User.findOne({ _id: req.params.friendID });
+    
+          if (!baseuser) {
+            return res.status(404).json({ message: 'No user with that ID' });
+          }
+        const user = await User.findOneAndUpdate(
+            { _id: req.params.userId},
+             { $push: {friends: baseuser}},
+         );
+        if(!user){
+             res.status(404).json({message: 'No User Exists'});
+        }
+        res.json(user);
+       }catch(err) {
+            res.status(500).json(err);
+        }
+      },
+
+
+      async removeFriend(req, res){
+        try{
+            const user = await User.findOneAndUpdate(
+              { _id: req.params.userId },
+              {$pull: {friends: req.params.friendID }}
+            );
+            if(!user){
+                res.status(404).json({message: 'No User Exists'});
+            }
+            res.json(user);
+        }catch(err){
+            res.status(500).json(err);
+        }
+      }
 };
